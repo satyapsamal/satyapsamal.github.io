@@ -1,1 +1,3 @@
-# satyapsamal.github.io
+Privacy for Humanity.
+Privacy for Freedom.
+Privacy for You.
