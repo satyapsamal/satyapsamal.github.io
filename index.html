@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>satyapsamal.github.io</title>
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none;
+        }
+
+        html, body {
+            /* Hide scrollbar for IE, Edge and Firefox */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            scroll-behavior: smooth; /* Native smooth scrolling for anchors */
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            
+            /* Disable Text & Element Selection */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+            -webkit-touch-callout: none; /* iOS Safari */
+        }
+
+        /* Glassmorphism Navbar */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+        }
+
+        /* Smooth word transition */
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .fade-in {
+            opacity: 1;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .hero-text {
+            font-weight: 400;
+        }
+
+        .hero-bold {
+            font-weight: 900;
+            letter-spacing: -0.02em;
+        }
+
+        /* Fluid Slow Pastel Rainbow Gradient */
+        .gradient-pastel {
+            background: linear-gradient(
+                to right,
+                #ffb3ba, /* Pastel Pink */
+                #ffdfba, /* Pastel Orange */
+                #ffffba, /* Pastel Yellow */
+                #baffc9, /* Pastel Green */
+                #bae1ff, /* Pastel Blue */
+                #e8baff, /* Pastel Purple */
+                #ffb3ba  /* Pastel Pink (loop) */
+            );
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fluid-colors 5s linear infinite;
+        }
+
+        @keyframes fluid-colors {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* Dynamic Spacer for layout shift */
+        #top-spacer {
+            /* 50vh (center) - 120px (nav padding) - 50px (approx half text height) */
+            height: max(0px, 50vh - 170px); 
+            transition: height 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #top-spacer.shrunk {
+            height: 4vh; /* Desired space between navbar and text after sliding up */
+            min-height: 20px;
+        }
+
+        /* Project Card Styling */
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        #project-showcase {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #project-showcase.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center min-h-screen" oncontextmenu="return false;" onselectstart="return false;" ondragstart="return false;">
+
+    <!-- Top Center Navbar -->
+    <nav class="fixed top-8 z-50 w-full flex justify-center px-4 pointer-events-none">
+        <div class="glass-nav px-12 py-5 md:px-20 md:py-6 flex items-center justify-center min-w-[300px] md:min-w-[450px] pointer-events-auto">
+            <h1 class="text-base md:text-lg tracking-[0.2em] font-medium">satyapsamal.github.io</h1>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <!-- pt-[120px] ensures content securely clears the navbar when forced to the top -->
+    <main id="hero-container" class="flex flex-col items-center w-full min-h-screen pt-[120px] px-4 pb-12">
+        
+        <!-- Invisible spacer pushing content to exact center initially -->
+        <div id="top-spacer" class="w-full"></div>
+
+        <!-- Hero Text -->
+        <div id="hero-wrapper" class="text-center shrink-0">
+            <h2 id="hero-title" class="text-4xl md:text-7xl lg:text-8xl tracking-tight hero-text transition-all duration-700">
+                Privacy for <span id="dynamic-word" class="inline-block transition-all duration-700">Humanity.</span>
+            </h2>
+        </div>
+
+        <!-- Hidden Project Wrapper (removes it from layout until needed) -->
+        <div id="project-wrapper" class="w-full max-w-3xl mt-12 md:mt-16 flex justify-center hidden">
+            <!-- Website Showcase Box -->
+            <div id="project-showcase" class="project-card p-8 md:p-10 rounded-[2.5rem] w-full">
+                <div class="flex items-start justify-between mb-6">
+                    <div class="flex flex-col">
+                        <span class="text-xs uppercase tracking-[0.3em] text-gray-500 mb-2 font-bold">Private Messaging Platform</span>
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4">Whisper | Private Messaging</h3>
+                        <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-xl">
+                            Whisper is a decentralized messaging platform with no central servers or tracking. Messages go directly between users, ensuring full privacy, zero data collection, and complete control of your conversations.                        </p>
+                    </div>
+                    <div class="w-16 h-16 md:w-24 md:h-24 rounded-2xl overflow-hidden bg-white/5 p-3 flex-shrink-0">
+                        <img 
+                            src="https://raw.githubusercontent.com/satyapsamal/whisper/1c2c17e90acc1e6ba9da21894b7e546bf539ab12/Whisper%20P2P%20Logo.webp" 
+                            alt="Whisper Logo" 
+                            class="w-full h-full object-contain pointer-events-none"
+                            onerror="this.src='https://ui-avatars.com/api/?name=W&background=333&color=fff'"
+                        >
+                    </div>
+                </div>
+                
+                <!-- Features List -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6 border-t border-white/10">
+                    <div class="flex items-center space-x-3 text-sm text-gray-300">
+                        <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+                        <span>No Chats or Metadata Stored</span>
+                    </div>
+                    <div class="flex items-center space-x-3 text-sm text-gray-300">
+                        <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+                        <span>Private AI Enhanced Voice & Video Calls</span>
+                    </div>
+                    <div class="flex items-center space-x-3 text-sm text-gray-300">
+                        <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+                        <span>End-to-End Encrypted</span>
+                    </div>
+                    <div class="flex items-center space-x-3 text-sm text-gray-300">
+                        <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+                        <span>Open Source & Transparent</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-4">
+                    <a href="https://satyapsamal.github.io/whisper/" target="_blank" rel="noopener noreferrer" class="group relative inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-black bg-white rounded-full overflow-hidden transition-transform active:scale-95">
+                        <span class="mr-2">Visit the Platform</span>
+                        <!-- Arrow: Standard -> on mobile. NE (rotated) on desktop. -> (unrotated) on desktop hover -->
+                        <svg class="w-4 h-4 transform transition-transform duration-300 md:-rotate-45 md:group-hover:rotate-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/satyapsamal/whisper" target="_blank" rel="noopener noreferrer" class="group relative inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-white bg-white/5 border border-white/20 rounded-full hover:bg-white/10 transition-colors active:scale-95">
+                        <span class="mr-2">Source code</span>
+                        <!-- Arrow: Standard -> on mobile. NE (rotated) on desktop. -> (unrotated) on desktop hover -->
+                        <svg class="w-4 h-4 transform transition-transform duration-300 md:-rotate-45 md:group-hover:rotate-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Reveal Text Element -->
+        <div id="more-text-container" class="w-full text-center mt-32 mb-16 hidden">
+            <p id="more-text" class="text-xl md:text-2xl font-medium text-gray-400 tracking-wider opacity-0 translate-y-6 transition-all duration-1000 ease-out">
+                More Is On The Way :)
+            </p>
+        </div>
+
+    </main>
+
+    <!-- Lenis Smooth Scrolling CDN -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    
+    <script>
+        // --- Security Features Start ---
+        
+        // Prevent Context Menu (Right Click) via JS
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Prevent Keyboard Shortcuts
+        document.addEventListener('keydown', function(e) {
+            // F12
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                return false;
+            }
+
+            // Detect CMD (Mac) or CTRL (Windows/Linux)
+            if (e.ctrlKey || e.metaKey) {
+                
+                // Shift Key Combinations (Ctrl+Shift+I / J / C or Cmd+Option+I / J / C)
+                if (e.shiftKey || e.altKey) {
+                    if (e.key === 'I' || e.key === 'i' || e.keyCode === 73 ||
+                        e.key === 'J' || e.key === 'j' || e.keyCode === 74 ||
+                        e.key === 'C' || e.key === 'c' || e.keyCode === 67 ||
+                        e.key === 'U' || e.key === 'u' || e.keyCode === 85) {
+                        e.preventDefault();
+                        return false;
+                    }
+                }
+
+                // General Combos: View Source (U), Save (S), Print (P), Select All (A), Copy (C)
+                if (e.key === 'U' || e.key === 'u' || e.keyCode === 85 ||
+                    e.key === 'S' || e.key === 's' || e.keyCode === 83 ||
+                    e.key === 'P' || e.key === 'p' || e.keyCode === 80 ||
+                    e.key === 'A' || e.key === 'a' || e.keyCode === 65 ||
+                    e.key === 'C' || e.key === 'c' || e.keyCode === 67) {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+        });
+        
+        // --- Security Features End ---
+
+        // Initialize Lenis for momentum smooth scrolling
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+            smooth: true,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        window.onload = () => {
+            const dynamicWord = document.getElementById('dynamic-word');
+            const spacer = document.getElementById('top-spacer');
+            const projectWrapper = document.getElementById('project-wrapper');
+            const projectShowcase = document.getElementById('project-showcase');
+            const moreTextContainer = document.getElementById('more-text-container');
+            const moreText = document.getElementById('more-text');
+            
+            const stages = [
+                { text: "Freedom.", bold: false },
+                { text: "You.", bold: true }
+            ];
+            let currentStage = 0;
+
+            const updateWord = () => {
+                if (currentStage >= stages.length) return;
+
+                dynamicWord.classList.add('fade-out');
+                dynamicWord.classList.remove('fade-in');
+
+                setTimeout(() => {
+                    const stage = stages[currentStage];
+                    dynamicWord.innerText = stage.text;
+                    
+                    if (stage.bold) {
+                        dynamicWord.classList.add('hero-bold');
+                    } else {
+                        dynamicWord.classList.remove('hero-bold');
+                    }
+                    
+                    dynamicWord.classList.remove('fade-out');
+                    dynamicWord.classList.add('fade-in');
+                    
+                    currentStage++;
+                    
+                    if (currentStage < stages.length) {
+                        setTimeout(updateWord, 3000);
+                    } else {
+                        // After the final word "You." has stayed for 2 seconds, trigger layout shift
+                        setTimeout(triggerLayoutShift, 2000);
+                    }
+                }, 800);
+            };
+
+            const triggerLayoutShift = () => {
+                // 1. Add pastel gradient effect precisely when moving
+                dynamicWord.classList.add('gradient-pastel');
+
+                // 2. Shrink spacer to smoothly slide text up to its banner position
+                spacer.classList.add('shrunk');
+                
+                // 3. Introduce project showcase & scroll-text to the DOM layout tree
+                projectWrapper.classList.remove('hidden');
+                moreTextContainer.classList.remove('hidden');
+                
+                // Setup Intersection Observer for scroll animation
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            moreText.classList.remove('opacity-0', 'translate-y-6');
+                            moreText.classList.add('opacity-100', 'translate-y-0');
+                            observer.unobserve(entry.target); // Ensure it only triggers once
+                        }
+                    });
+                }, { threshold: 0.2 });
+
+                // Observe the container so the user needs to scroll a bit
+                observer.observe(moreTextContainer);
+
+                // 4. Wait briefly to let the text start sliding before executing the project fade-in
+                setTimeout(() => {
+                    projectShowcase.classList.add('visible');
+                }, 400); 
+            };
+
+            // Start the text sequence 3 seconds after load while centered
+            setTimeout(updateWord, 3000);
+        };
+    </script>
+</body>
+</html>
